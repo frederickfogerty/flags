@@ -1,0 +1,39 @@
+<div class="row">
+    <!-- takes up 10/12 columns, gives some padding -->
+    <div class="small-12 large-10 small-centered columns" ng-class="{flipped: flippedState}" id="flags">
+        <!-- evenly spaces flags on all screen resolutions -->
+        <div class="side front">
+            <div class="row">
+                <li ng-repeat="flag in flags" 
+                    ng-click="flipOver(flag)"
+                    class="{{'flag-list-animation ' + flag.activeClass}}">
+                    <img ng-src="{{flag.src}}" class="small-2">{{small_desc}}
+                    <p class="small-8 small-offset-1" >
+                        <heading>{{flag.name}}</heading>
+                        <description ng-bind-html="flag.small_desc"></description>
+                     </p>
+                </li>
+            </div>
+        </div>
+
+        <div class="side back">
+            <div class="row description">
+                <div class="row nav">
+                    <a href="" ng-click="prev()" class="left">❮ prev</a>
+                    <a href="" ng-click="all()" class="all">&#8617; all</a>
+                    <a href="" ng-click="next()" class="right">next ❯</a>
+                </div>
+                <div class="small-12 large-3 columns">
+                    <img ng-click="all()" ng-src="{{currentFlag.src}}">
+                </div>
+                <!-- main description -->
+                <div class="small-12 large-9 columns">
+                    <h3>{{currentFlag.name}}</h3>
+                    <!-- <p ng-bind-html="currentFlag.description | markdown"></p> -->
+                    <p ng-bind-html="currentDesc"></p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

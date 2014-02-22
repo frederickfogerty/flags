@@ -1,0 +1,92 @@
+
+<!DOCTYPE html>
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang="en" ng-app="Flags"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" ng-app="Flags"> <!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+    <title>Flags</title>
+
+    <link rel="stylesheet" href="css/app.css">
+    <link rel="stylesheet" href="css/chardinjs.css">
+
+    <script src="js/vendor/custom.modernizr.js"></script>
+</head>
+<body >
+<!-- NAV BAR -->
+    <nav id="nav-wrap" ng-controller="NavCntl">
+        <ul id="top-ul">
+            <li id="title" ng-bind="title"></li>
+            <li id="menu-icon-wrap">
+                <div id="menu-icon" ng-click="mobile_menu()">Menu</div>
+            </li>
+            <li class="nav-right" ng-class="{active: nav_class}">
+                <ul id="nav">
+                    <li><a href="#/all" ng-click="mobile_menu()" ng-class="active_link('reference')">Reference</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#/quiz" ng-click="mobile_menu()" ng-class="active_link('question')">Questions</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#/scenario" ng-click="mobile_menu()" ng-class="active_link('scenario')">Scenarios</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+
+
+    <!-- app.js controls what is inside this -->
+    <div id="content-container" ng-view hm-swipe-left="swipe()"></div>
+
+    <div id="copyright">© Copyright Frederick Fogerty 2013</div>
+
+    <script src="js/vendor/jquery.js"></script>
+
+    <script src="js/marked.js"></script>
+
+    <script src="js/moment.min.js"></script>
+
+    <script src="js/hammer.min.js"></script>
+
+    <script src="js/jquery.hammer.min.js"></script>
+
+    
+
+    <!-- TODO: Remove unnecessary foundation files -->
+    <!-- Import Foundation Javascript Files-->
+    <script src="js/foundation/foundation.js"></script>
+
+    <script src="js/foundation/foundation.abide.js"></script>
+
+    <script src="js/foundation/foundation.clearing.js"></script>
+
+    <script src="js/foundation/foundation.dropdown.js"></script>
+
+    <script src="js/foundation/foundation.interchange.js"></script>
+
+    <script src="js/foundation/foundation.joyride.js"></script>
+
+    <script src="js/foundation/foundation.magellan.js"></script>
+
+    <script src="js/foundation/foundation.orbit.js"></script>
+
+    <script src="js/foundation/foundation.reveal.js"></script>
+
+    <!-- initialise foundation -->
+    <script>
+    $(document).foundation();
+    </script>
+    <!-- <script src="js/jquery.knob.js"></script>-->
+    <!-- import angular files -->
+    <script src="js/angular.min.js"></script>
+    <script src="js/angular-hammer.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.0rc1/angular-route.min.js"></script>
+    <script src="js/angular-sanitize.min.js"></script>
+    <script src="js/chardinjs.min.js"></script>
+
+    <!-- Main Angular App JS File -->
+    <script src="js/app.js"></script>
+
+    <!-- livereload -->
+    <script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
+</body>
+</html>

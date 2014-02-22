@@ -1,0 +1,782 @@
+// Global Foundation Settings
+@import foundation/settings
+
+// Comment out this import if you don't want to use normalize
+@import normalize
+
+// Comment out this import if you are customizing you imports below
+@import foundation
+
+html, body
+    background-color: #dbdbdb
+    background-image: url("../res/images/background-repeat.png")
+    background-repeat: repeat
+    font-family: 'Open Sans', Helvetica
+    overflow-x: hidden
+
+hr
+    margin: 17px 0 18px
+    height: 0
+    clear: both
+    // border: solid #ddd;
+    border-top: 1px solid #ddd
+    border-bottom: 1px solid #fff
+
+#copyright
+    text-align: center
+    font:
+        weight: 300
+        size: 13px
+    color: #888
+
+@font-face
+    font-family: 'BebasNeueRegular'
+    src: url("../res/fonts/BebasNeue-webfont.eot")
+    src: url("../res/fonts/BebasNeue-webfont.eot?#iefix") format("embedded-opentype"), url("../res/fonts/BebasNeue-webfont.woff") format("woff"), url("../res/fonts/BebasNeue-webfont.ttf") format("truetype"), url("../res/fonts/BebasNeue-webfont.svg#BebasNeueRegular") format("svg")
+    font-weight: normal
+    font-style: normal
+
+@import url(//fonts.googleapis.com/css?family=Open+Sans:400,300,600)
+ 
+//===================================================================
+//    General Card CSS Mixin
+//===================================================================
+
+body
+    // makes sure there is 3D effect
+    -webkit-perspective: 800px
+    // Chrome, Safari 3.1+
+    -moz-perspective: 800px
+    // Firefox 3.5-15
+    -ms-perspective: 800px
+    // IE 9
+    -o-perspective: 800px
+    // Opera 10.50-12.00
+    perspective: 800px
+    // takes up whole browser window for background + vertical centering
+    position: absolute
+    top: 0
+    bottom: 0
+    height: 100%
+    width: 100%
+
+*
+    -moz-perspective: 800px 
+    -ms-perspective: 800px
+    -o-perspective: 800px
+    perspective: 800px
+
+=card-ui($div)
+    #content-container
+        position: relative
+        // approximate screen - nav-bar height
+        height: 90%
+        margin: auto
+        & > div
+            height: 100%
+        #{$div}
+            // take up 100% of container
+            height: 100%
+            // set up css3 transitions
+            -webkit-transform-style: preserve-3d
+            // Chrome, Safari 3.1+
+            -moz-transform-style: preserve-3d
+            // Firefox 3.5-15
+            -ms-transform-style: preserve-3d
+            // IE 9
+            -o-transform-style: preserve-3d
+            // Opera 10.50-12.00
+            transform-style: preserve-3d
+            // Specified transitions to advoid problems with other transitions
+            -webkit-transition: .7s -webkit-transform
+            // Chrome, Safari 3.1+
+            -moz-transition: .7s -moz-transform
+            // Firefox 3.5-15
+            -ms-transition: .7s -ms-transform
+            // IE 9
+            -o-transition: .7s -o-transform
+            // Opera 10.50-12.00
+            transition: .7s transform
+            &.flipped
+                // style that is toggled when a flag is clicked
+                -webkit-transform: rotateY(180deg) translateZ(-0.0001px)
+                // Chrome, Safari 3.1+
+                -moz-transform: rotateY(180deg) translateZ(-0.0001px)
+                // Firefox 3.5-15
+                -ms-transform: rotateY(180deg) translateZ(-0.0001px)
+                // IE 9
+                -o-transform: rotateY(180deg) translateZ(-0.0001px)
+                // Opera 10.50-12.00
+                transform: rotateY(180deg) translateZ(-0.0001px)
+            .side
+                // positions card sides behind each other
+                position: absolute
+                // Stretching method to vertically align div in the center of the parent
+                top: 0
+                bottom: 0
+                width: 100%
+                margin: auto
+                // margin-right: 20px;
+
+                -webkit-backface-visibility: hidden
+                -moz-backface-visibility: hidden
+                -ms-backface-visibility: hidden
+                -o-backface-visibility: hidden
+                backface-visibility: hidden
+                &:before
+                    // Stretching hack to vertically align div of unknown height
+                    content: ''
+                    display: inline-block
+                    margin-right: -0.25em
+                    height: 100%
+                    vertical-align: middle
+                > div
+                    // Stretching hack to vertically align div of unknown height
+                    display: inline-block
+                    vertical-align: middle
+                    padding: 20px
+                    width: 100%
+                    // general styling
+                    background-color: #f9f9f9
+                    +radius(3px)
+                    box-shadow: 0px 10px 1px -5px #ccc
+            .front
+                padding: 10px
+            .back
+                padding: 10px
+                // make it the back side
+                -webkit-transform: rotateY(180deg)
+                // Chrome, Safari 3.1+
+                -moz-transform: rotateY(180deg)
+                // Firefox 3.5-15
+                -ms-transform: rotateY(180deg)
+                // IE 9
+                -o-transform: rotateY(180deg)
+                // Opera 10.50-12.00
+                transform: rotateY(180deg)
+                // text-align: center;
+                display: none
+                @media #{$small}
+                    display: inherit
+            &.flipped .back
+                display: block
+
+    
+//===================================================================
+//    Navigation
+//===================================================================
+
+#nav-wrap
+    margin: 0 0 30px 0
+    letter-spacing: 1px
+    background-color: #111111
+    box-shadow: 0 5px 2px #bbb
+    #top-ul
+        // height: 57px;
+        text-align: center
+        & > li
+            @media #{$small}
+                display: inline-block
+            margin: 0
+        #menu-icon
+            display: none
+            // hide menu icon for large screens
+    #title
+        color: white
+        font-weight: bold
+        padding: 16px
+    #nav
+        li
+            display: inline-block
+            text-align: center
+            margin: 0
+            padding: 0
+            width: auto
+            list-style: none
+            margin-right: 5px
+            a
+                font-weight: 200
+                font-size: 14px
+                padding: 4px 15px
+                display: block
+                color: #fff
+                &:hover, &.active:hover
+                    // background: #2795b6;
+                    border-bottom: 5px solid #fff
+                &.active
+                    border-bottom: 2px solid #fff
+                    // text-decoration: underline;
+
+// =======MOBILE=========
+@media screen and (max-width: 768px)
+    // nav-wrap
+    #nav-wrap
+        position: relative
+        #top-ul
+            text-align: left
+        #title, #menu-icon-wrap
+            display: inline-block
+        #menu-icon-wrap
+            float: right
+        // menu icon
+        #menu-icon
+            font-size: 0.8em
+            color: #fff
+            text-transform: uppercase
+            font-weight: bold
+            padding: 18px
+            display: block !important
+            // show menu icon
+            &:hover
+                // background-color: #f8f8f8;
+            &.active
+                // background-color: #bbb;
+        .nav-right
+            width: 100%
+            margin: 0
+            padding: 0
+            display: none
+            &.active
+                display: block
+                #nav
+                    display: block
+            #nav
+                width: 100%
+                background: #222222
+                display: none
+                // visibility will be toggled with jquery
+                margin: 0
+                li
+                    clear: both
+                    float: none
+                    display: block
+                    padding: 10px 15px 10px 15px
+                    text-align: right
+                    a
+                        font:
+                            size: 1em
+                            weight: bold
+                        text:
+                            transform: uppercase
+                        &:hover
+                            border: none
+                        padding: 0
+                        color: white
+                        border: none
+                    &.divider
+                        border-bottom: solid 1px #2b2b2b
+                        border-top: solid 1px black
+                        clear: both
+                        height: 1px
+                        margin: 0
+                        padding: 0
+
+@media screen and (min-width: 768px)
+    // ensure #nav is visible on desktop version
+    #nav
+        display: block !important
+
+    
+//===================================================================
+//    All Flags CSS
+//===================================================================
+
+#flags
+    -webkit-transition: 1s
+    .front
+        -webkit-transition: 1s
+        position: absolute
+        left: 50%
+        width: 100%
+        margin-left: -50%
+    .front.active
+        display: none
+        margin-left: -100%
+        margin-right: -200%
+    .back
+        -webkit-transition: 1s
+        position: absolute
+        left: 50%
+        width: 80%
+        margin-left: 100%
+        display: block
+        background-color: blue
+    .back.active
+        margin-left: -40%
+
+#flags.flipped
+    .front
+        // display: none
+        margin-left: -160%
+        // margin-right: -200%
+    .back
+        margin-left: -40%
+
+.side
+    &:before
+        // Stretching hack to vertically align div of unknown height
+        content: ''
+        display: inline-block
+        margin-right: -0.25em
+        height: 100%
+        vertical-align: middle
+    > div
+        // Stretching hack to vertically align div of unknown height
+        display: inline-block
+        vertical-align: middle
+        padding: 20px
+        width: 100%
+        // general styling
+        background-color: #f9f9f9
+        +radius(3px)
+        box-shadow: 0px 10px 1px -5px #ccc
+
+#flags
+    .front
+        -webkit-transition: 0.7s
+        @media #{$small}
+            padding: 10px
+        list-style-type: none
+        li
+            img
+                vertical-align: top
+                padding: 0
+                margin: 0
+            padding: 10px 0 10px 10px
+            @media #{$small}
+                padding: 30px 0 30px 30px
+            margin: 0
+            p
+                heading
+                    font-family: 'BebasNeueRegular'
+                    font-size: 20px
+                    display: table
+                    border-bottom: 2px solid black
+                    letter-spacing: 2px
+                padding: 0
+                font-size: 1rem
+                display: inline-block
+                margin: 0
+            border-bottom: 1px solid #ccc
+    .front.hidden
+        li
+            opacity: 0.1
+            &.active
+                display: block
+                position: fixed
+                top: 100px
+    .back
+        text-align: left
+        h3
+            font-family: 'BebasNeueRegular'
+            font-size: 40px
+            display: table
+            border-bottom: 3px solid black
+            letter-spacing: 2px
+            text-align: center
+            width: 100%
+            @media #{$small}
+                text-align: left
+                width: auto
+        img 
+            margin: auto
+            display: block
+        .nav 
+            text-align: center
+            padding: 0 20px 20px 20px
+            a.left
+                float: left
+            a.right
+                float: right
+            a.all
+                // position: absolute
+
+    
+//===================================================================
+//    Questions CSS
+//===================================================================
+
++card-ui("#questions")
+
++card-ui("#question-list")
+
+#questions, #question-list
+    .front
+        padding: 10px
+    .back
+        text-align: center
+    .columns
+        position: inherit
+    #question
+        text:
+            align: center
+            // decoration: underline;
+        @media #{$small}
+            font-size: 30px
+            // text-shadow: 0px -1px 1px #000, #fff 0 1px 1px ;
+        // color: #333;
+        line-height: 200%
+        text-shadow: 0 1px 1px #fff
+        p
+            font:
+                weight: bold
+    #answers ul
+        // margin-top: 10px;
+        list-style-type: none
+        li
+            text-align: center
+            margin: 0 0 10px 0
+            font-size: 2em
+            img
+                padding: 10px
+            p
+                display: inline
+            span.qlabel
+                color: #666
+                font:
+                    weight: 200
+            &:hover, &:hover p
+                background-color: #ccc
+                font-weight: bold
+    .curr-question-number-container
+        font-size: 40px
+        text-align: center
+        font-weight: 200
+        margin-bottom: 15px
+        overflow: hidden
+        margin-left: 0
+        padding-left: 0
+        -webkit-transtion: 1s
+        // Chrome, Safari 3.1+
+        -moz-transtion: 1s
+        // Firefox 3.5-15
+        -ms-transtion: 1s
+        // IE 9
+        -o-transtion: 1s
+        // Opera 10.50-12.00
+        transtion: 1s
+        // height: 60px;
+    .last-question-number.flyOut
+        // margin-left: -300px;
+        // opacity: 0;
+        -webkit-animation: question-flyOut 1s ease
+        // Chrome, Safari 3.1+
+        -moz-animation: question-flyOut 1s ease
+        // Firefox 3.5-15
+        -ms-animation: question-flyOut 1s ease
+        // IE 9
+        -o-animation: question-flyOut 1s ease
+        // Opera 10.50-12.00
+        animation: question-flyOut 1s ease
+    .last-question-number
+        display: inline-block
+        float: left
+        width: 80%
+        margin-left: -70%
+        opacity: 0
+        // background-color: red;
+    .curr-question-number
+        display: inline-block
+        width: 80%
+        float: left
+        margin-right: -100%
+        // background-color: blue;
+    .curr-question-number.flyIn
+        -webkit-animation: question-flyIn 1s ease
+        // Chrome, Safari 3.1+
+        -moz-animation: question-flyIn 1s ease
+        // Firefox 3.5-15
+        -ms-animation: question-flyIn 1s ease
+        // IE 9
+        -o-animation: question-flyIn 1s ease
+        // Opera 10.50-12.00
+        animation: question-flyIn 1s ease
+
+#question-list
+    ul
+        list-style: none
+        li
+            text-align: center
+            padding: 10px
+            height: 50px
+            background: url(../res/images/right.png) no-repeat right 0
+            &.even
+                background-color: #eee
+            &:hover, &:hover p
+                background-color: #ddd
+                font-weight: bold
+
+@-webkit-keyframes question-flyOut
+    0%
+        margin-left: 10%
+        opacity: 1
+    50%
+        opacity: 0
+    100%
+        margin-left: -70%
+        opacity: 0
+
+
+@-moz-keyframes question-flyOut
+    0%
+        margin-left: 0%
+        opacity: 1
+    50%
+        opacity: 0
+    100%
+        margin-left: -100%
+        opacity: 0
+
+
+@-webkit-keyframes question-flyIn
+    0%
+        opacity: 0
+        // margin-left: 75%
+    100%
+        opacity: 1
+        // margin-left: -25%
+
+
+@-moz-keyframes question-flyIn
+    0%
+        opacity: 0
+    100%
+        opacity: 1
+
+
+    
+//===================================================================
+//    Scenario CSS
+//===================================================================
+
++card-ui("#scenario")
+
++card-ui("#scenario-list")
+
+#scenario
+    font:
+        // family: 'BebasNeueRegular', Arial, Helvetica, sans-serif;
+    .columns
+        position: inherit
+    .front
+        #time
+            list-style: none
+            margin: 0
+            text-align: center
+            li
+                display: inline
+                @media #{$small}
+                    font:
+                        size: 10em
+                font:
+                    size: 7em
+                    family: 'BebasNeueRegular', Arial, Helvetica, sans-serif
+                &.point
+                    -webkit-animation: clock_blink 2s ease infinite
+                    // Chrome, Safari 3.1+
+                    -moz-animation: clock_blink 2s ease infinite
+                    // Firefox 3.5-15
+                    -ms-animation: clock_blink 2s ease infinite
+                    // IE 9
+                    -o-animation: clock_blink 2s ease infinite
+                    // Opera 10.50-12.00
+                    animation: clock_blink 2s ease infinite
+                &.second
+                    font:
+                        size: 2.5em
+                    @media #{$small}
+                        font-size: 5em
+        #status
+            -webkit-transition: 4s color
+            color: #666
+            @media #{$small}
+                margin-top: -50px
+            margin-top: -10px
+            text:
+                align: center
+                decoration: bold
+            font:
+                family: 'BebasNeueRegular', Arial, Helvetica, sans-serif
+                weight: bold
+                size: 1.5em
+            @media #{$small}
+                font:
+                    size: 2em
+            &.highlight
+                color: red
+                -webkit-transition: 0s color
+        .current-flags-label
+            text-align: center
+        .no-current-flags
+            font-style: italic
+            color: #888888
+        .current-flags
+            // display: inline-block;
+            text-align: center
+            li
+                display: inline-block
+        .rating, .rating-long
+            overflow: hidden
+            display: inline-block
+            vertical-align: middle
+            .rating-input
+                // position: absolute;
+                // left: 0;
+                // top: -50px;
+                display: none
+            .rating-star,
+            &:hover .rating-star
+                float: right
+                display: block
+                height: 18px
+                margin: 2px
+        .short-label
+            width: 55px
+            height: 16px
+            display: inline-block
+            vertical-align: middle
+            color: #999
+            font:
+                size: 1em
+        .long-label
+            width: 55px
+            height: 16px
+            display: inline-block
+            vertical-align: middle
+            color: #999
+            font:
+                size: 1em
+        .rating
+            &:hover .rating-star:hover,
+            &:hover .rating-star:hover ~ .rating-star,
+            .rating-input:checked ~ .rating-star
+                background-position: 0 18px
+            .rating-star,
+            &:hover .rating-star
+                width: 18px
+                background: url("../res/images/toots.png") 0 0
+        .rating-long
+            &:hover .rating-star:hover,
+            &:hover .rating-star:hover ~ .rating-star,
+            .rating-input:checked ~ .rating-star
+                background-position: -18px 18px
+            .rating-star,
+            &:hover .rating-star
+                width: 32px
+                background: url("../res/images/toots.png") -18px 0
+        .section-label
+            font-size: 1.5em
+            display: block
+            padding-bottom: 15px
+            // padding-top: 10px;
+            text-align: center
+        .current-actions-ul
+            li
+                text-align: center
+                list-style-type: none
+                // @media #{$small} {
+                //  text-align: left;
+                // }
+                &.add-action
+                    font:
+                        // weight: bold;
+                        // style: italic;
+                        size: 1em
+                    cursor: pointer
+                    // @media #{$small} {
+                    //  font-size: 0.7em;
+                    // }
+                    > span
+                        margin-top: 10px
+                        padding: 10px 10px
+                        -webkit-border-radius: 2px 2px
+                        border: solid 1px #dadada
+                        background: #f4f4f4
+                        // Old browsers
+                        color: #555
+                        text-decoration: none
+                        cursor: pointer
+                        display: inline-block
+                        text-align: center
+                        font-weight: bold
+                        font-family: Arial, Helvetica, sans-serif
+                        text-shadow: 0px 1px 1px rgba(255, 255, 255, 1)
+                        line-height: 1
+                        font-size: 11px
+                &.no-actions
+                    font-style: italic
+                    color: #888888
+                img
+                    height: 40px
+    &.flipped
+        .point
+            -webkit-animation: none
+            // Chrome, Safari 3.1+
+            -moz-animation: none
+            // Firefox 3.5-15
+            -ms-animation: none
+            // IE 9
+            -o-animation: none
+            // Opera 10.50-12.00
+            animation: none
+
+#scenario-list
+    ul
+        list-style: none
+        li
+            text-align: center
+            padding: 10px
+            height: 50px
+            background: url(../res/images/right.png) no-repeat right 0
+            &.even
+                background-color: #eee
+            &:hover, &:hover p
+                background-color: #ddd
+                font-weight: bold
+    .title
+        font-size: 40px
+        text-align: center
+        font-weight: 200
+        margin-bottom: 15px
+        overflow: hidden
+        -webkit-transtion: 1s
+        // Chrome, Safari 3.1+
+        -moz-transtion: 1s
+        // Firefox 3.5-15
+        -ms-transtion: 1s
+        // IE 9
+        -o-transtion: 1s
+        // Opera 10.50-12.00
+        transtion: 1s
+        // height: 60px;
+
+@-webkit-keyframes clock_blink
+    0%
+        opacity: 1.0
+        // text-shadow: 0 0 20px #00c6ff;
+    49%
+        opacity: 1.0
+    50%
+        opacity: 0
+        // text-shadow: none;
+    99%
+        opacity: 0
+    100%
+        opacity: 1.0
+        // text-shadow: 0 0 20px #00c6ff;
+
+
+@-moz-keyframes clock_blink
+    0%
+        opacity: 1.0
+        // text-shadow: 0 0 20px #00c6ff;
+    49%
+        opacity: 1.0
+    50%
+        opacity: 0
+        // text-shadow: none;
+    99%
+        opacity: 0
+    100%
+        opacity: 1.0
+        // text-shadow: 0 0 20px #00c6ff;
