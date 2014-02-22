@@ -129,9 +129,14 @@ angular.module('Flags', ['ngRoute','ngSanitize', 'hmTouchEvents'])
 
 		$scope.setIndex = $routeParams.index;
 
+        $scope.answerdesc = function (answer) {
+            return $sce.trustAsHtml(marked(answer));
+        }
+
 		$scope.next = function () {
             $scope.last_question = $scope.curr_question;
     		$scope.curr_question = $scope.questions[$scope.setIndex].questions[$scope.qIndex];
+            $scope.curr_question_name = $sce.trustAsHtml(marked($scope.curr_question.question))
     		$scope.qIndex++;
             $scope.flip('front');
 

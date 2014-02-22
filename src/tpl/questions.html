@@ -7,7 +7,7 @@
                     <span ng-class="{flyOut: transition}" class="last-question-number">Question {{last_question.question_label}}.</span>
                     <span ng-class="{flyIn: transition}" class="curr-question-number" >Question {{curr_question.question_label}}.</span></div>
                 <hr>
-        		<div class="small-12 columns" id="question" ng-bind-html="curr_question.question | markdown">
+        		<div class="small-12 columns" id="question" ng-bind-html="curr_question_name">
 				</div>
 				<!-- <div id="timer_container">
 					<input type="text" id="timer" value="200" data-fgColor="#ddd" data-width="75" data-readOnly="true">
@@ -17,7 +17,7 @@
 					<ul>
 					    <li ng-click="answerquestion($index)" ng-repeat="answer in curr_question.answers">
                             <span class="qlabel">({{["a","b","c","d","e"][$index]}})</span>
-                            <span ng-bind-html="answer | markdown"></span>
+                            <span ng-bind-html="answerdesc(answer)"></span>
                         </li>
 					</ul>
 				</div>
