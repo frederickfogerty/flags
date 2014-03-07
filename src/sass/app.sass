@@ -43,16 +43,16 @@ hr
 //===================================================================
 
 body
-    // makes sure there is 3D effect
-    -webkit-perspective: 800px
-    // Chrome, Safari 3.1+
-    -moz-perspective: 800px
-    // Firefox 3.5-15
-    -ms-perspective: 800px
-    // IE 9
-    -o-perspective: 800px
-    // Opera 10.50-12.00
-    perspective: 800px
+    // // makes sure there is 3D effect
+    // -webkit-perspective: 800px
+    // // Chrome, Safari 3.1+
+    // -moz-perspective: 800px
+    // // Firefox 3.5-15
+    // -ms-perspective: 800px
+    // // IE 9
+    // -o-perspective: 800px
+    // // Opera 10.50-12.00
+    // perspective: 800px
     // takes up whole browser window for background + vertical centering
     position: absolute
     top: 0
@@ -61,10 +61,10 @@ body
     width: 100%
 
 *
-    -moz-perspective: 800px 
-    -ms-perspective: 800px
-    -o-perspective: 800px
-    perspective: 800px
+    // -moz-perspective: 800px 
+    // -ms-perspective: 800px
+    // -o-perspective: 800px
+    // perspective: 800px
 
 =card-ui($div)
     #content-container
@@ -75,6 +75,10 @@ body
         & > div
             height: 100%
         #{$div}
+            -moz-perspective: 800px 
+            -ms-perspective: 800px
+            -o-perspective: 800px
+            perspective: 800px
             // take up 100% of container
             height: 100%
             // set up css3 transitions
@@ -283,6 +287,11 @@ body
 
 #flags
     -webkit-transition: 1s
+    .side > div
+        background-color: #f9f9f9
+        +radius(3px)
+        box-shadow: 0px 10px 1px -5px #ccc
+        padding: 20px
     .front
         -webkit-transition: 1s
         position: absolute
@@ -295,41 +304,23 @@ body
         margin-right: -200%
     .back
         -webkit-transition: 1s
-        position: absolute
+        // -webkit-transform: translateZ(0)
+        position: fixed
+        top: 100px
         left: 50%
         width: 80%
         margin-left: 100%
         display: block
-        background-color: blue
     .back.active
         margin-left: -40%
 
 #flags.flipped
     .front
         // display: none
-        margin-left: -160%
+        margin-left: -200%
         // margin-right: -200%
     .back
         margin-left: -40%
-
-.side
-    &:before
-        // Stretching hack to vertically align div of unknown height
-        content: ''
-        display: inline-block
-        margin-right: -0.25em
-        height: 100%
-        vertical-align: middle
-    > div
-        // Stretching hack to vertically align div of unknown height
-        display: inline-block
-        vertical-align: middle
-        padding: 20px
-        width: 100%
-        // general styling
-        background-color: #f9f9f9
-        +radius(3px)
-        box-shadow: 0px 10px 1px -5px #ccc
 
 #flags
     .front
