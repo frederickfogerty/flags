@@ -54,6 +54,8 @@ angular.module('Flags', ['ngRoute','ngSanitize', 'hmTouchEvents'])
 
 		// Set page title
 		// GlobalService.setTitle('Reference')
+     
+        $scope.cssTop = 100 
 		
 		// Pull JSON list of flags from /backend/all_flags.php
 		$http.get('backend/all_flags.php', {cache: true}).success(function(data) {
@@ -67,6 +69,7 @@ angular.module('Flags', ['ngRoute','ngSanitize', 'hmTouchEvents'])
     	$scope.flipOver = function (flag) {
     		$scope.index = $scope.flags.indexOf(flag); // finds flag in original array
             $scope.switchToFlag()
+            $scope.cssTop = $(window).scrollTop()+50 // moves secondary display
     	}
 
         $scope.switchToFlag = function () {

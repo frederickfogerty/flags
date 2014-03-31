@@ -54,11 +54,12 @@ body
     // // Opera 10.50-12.00
     // perspective: 800px
     // takes up whole browser window for background + vertical centering
-    position: absolute
+    // position: absolute
     top: 0
     bottom: 0
     height: 100%
     width: 100%
+
 
 *
     // -moz-perspective: 800px 
@@ -70,17 +71,14 @@ body
     #content-container
         position: relative
         // approximate screen - nav-bar height
-        height: 90%
         margin: auto
         & > div
-            height: 100%
+
         #{$div}
             -moz-perspective: 800px 
             -ms-perspective: 800px
             -o-perspective: 800px
             perspective: 800px
-            // take up 100% of container
-            height: 100%
             // set up css3 transitions
             -webkit-transform-style: preserve-3d
             // Chrome, Safari 3.1+
@@ -114,12 +112,12 @@ body
                 transform: rotateY(180deg) translateZ(-0.0001px)
             .side
                 // positions card sides behind each other
-                position: absolute
+                // position: absolute
                 // Stretching method to vertically align div in the center of the parent
-                top: 0
-                bottom: 0
-                width: 100%
-                margin: auto
+                // top: 0
+                // bottom: 0
+                // width: 100%
+                // margin: auto
                 // margin-right: 20px;
 
                 -webkit-backface-visibility: hidden
@@ -287,6 +285,7 @@ body
 
 #flags
     -webkit-transition: 1s
+    left: 0%
     .side > div
         background-color: #f9f9f9
         +radius(3px)
@@ -294,33 +293,28 @@ body
         padding: 20px
     .front
         -webkit-transition: 1s
-        position: absolute
-        left: 50%
-        width: 100%
-        margin-left: -50%
-    .front.active
-        display: none
-        margin-left: -100%
-        margin-right: -200%
+        // position: absolute
+        // left: 50%
+        // width: 100%
+        // margin-left: 50%
     .back
+        position: absolute
         -webkit-transition: 1s
         // -webkit-transform: translateZ(0)
-        position: fixed
-        top: 100px
+        // position: fixed
         left: 50%
         width: 80%
-        margin-left: 100%
-        display: block
-    .back.active
-        margin-left: -40%
+        margin-left: 80%
+        display: none
 
 #flags.flipped
+    -webkit-transition: 1s
+    left: -100%
     .front
-        // display: none
-        margin-left: -200%
-        // margin-right: -200%
+        // left: -200px
     .back
-        margin-left: -40%
+        display: block
+        // margin-left: -40%
 
 #flags
     .front
