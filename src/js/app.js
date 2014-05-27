@@ -69,7 +69,7 @@ angular.module('Flags', ['ngRoute','ngSanitize', 'hmTouchEvents'])
     	$scope.flipOver = function (flag) {
     		$scope.index = $scope.flags.indexOf(flag); // finds flag in original array
             $scope.switchToFlag()
-            $scope.cssTop = $(window).scrollTop()+50 // moves secondary display
+            $scope.cssTop = $(window).scrollTop()+00 // moves secondary display: RF changed to +00
     	}
 
         $scope.switchToFlag = function () {
