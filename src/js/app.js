@@ -436,7 +436,9 @@ angular.module('Flags', ['ngRoute','ngSanitize', 'hmTouchEvents'])
                 } else if (diff - 1 >= 1) {     $scope.time.add(1, 'minutes');
                 } else if (diffS - 10 >= 20) {  $scope.time.add(10, 'seconds');
                 } else if (diffS - 5 >= 10) {    $scope.time.add(5, 'seconds');
-                } else if (diffS - 1 >= 0) {    $scope.time.add(1, 'seconds'); $scope.currentStatus = "10 seconds to go...";
+                } else if (diffS - 1 >= 0) {    
+                    $scope.time.add(1, 'seconds'); 
+                    $scope.currentStatus = "10 seconds to go...";
                     $scope.stopDistractions = true;
                 }
 
@@ -462,7 +464,7 @@ angular.module('Flags', ['ngRoute','ngSanitize', 'hmTouchEvents'])
         $http.get('backend/scenario.php').success(function(data) {
             $scope.scenarios = data;
             $scope.run();
-            $timeout(function() {$('body').chardinJs('start')}, 2000);
+            // $timeout(function() {$('body').chardinJs('start')}, 2000);
         });
 
         $http.get('backend/all_flags.php', {cache: true}).success(function(data) {

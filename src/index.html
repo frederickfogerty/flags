@@ -8,14 +8,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
     <title>Flags</title>
     <link rel="stylesheet" href="css/app.css">
-    <link rel="stylesheet" href="css/chardinjs.css">
+    <link rel="stylesheet" href="css/flat-ui.css">
     <script src="js/vendor/custom.modernizr.js"></script>
 </head>
 <body >
 <!-- NAV BAR -->
     <nav id="nav-wrap" ng-controller="NavCntl">
         <ul id="top-ul">
-            <li id="title" ng-bind="title"></li>
+            <li id="title" ng-bind="title.toUpperCase()"></li>
             <li id="menu-icon-wrap">
                 <div id="menu-icon" ng-click="mobile_menu()">Menu</div>
             </li>
@@ -31,8 +31,6 @@
         </ul>
     </nav>
 
-
-    <!-- app.js controls what is inside this -->
     <div id="content-container" ng-view hm-swipe-left="swipe()"></div>
 
     <div id="copyright">© Copyright Frederick Fogerty 2013</div>

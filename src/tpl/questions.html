@@ -1,42 +1,47 @@
 <div class="row">
-	<div class="small-10 small-centered columns" ng-class="{flipped: flippedState}" id="questions">
+    <div class="small-12 small-centered columns" ng-class="{flipped: flippedState}" id="questions">
         <div class="side front">
-        	<div class="row">
-                <div class="small-12 columns curr-question-number-container ">
-                    &nbsp;
-                    <span ng-class="{flyOut: transition}" class="last-question-number">Question {{last_question.question_label}}.</span>
-                    <span ng-class="{flyIn: transition}" class="curr-question-number" >Question {{curr_question.question_label}}.</span></div>
-                <hr>
-        		<div class="small-12 columns" id="question" ng-bind-html="curr_question_name">
-				</div>
-				<!-- <div id="timer_container">
-					<input type="text" id="timer" value="200" data-fgColor="#ddd" data-width="75" data-readOnly="true">
-				</div> -->
-				<!-- <hr> -->
-				<div class="small-12 columns" id="answers">
-					<ul>
-					    <li ng-click="answerquestion($index)" ng-repeat="answer in curr_question.answers">
-                            <span class="qlabel">({{["a","b","c","d","e"][$index]}})</span>
-                            <span ng-bind-html="answerdesc(answer)"></span>
-                        </li>
-					</ul>
-				</div>
-			</div>
+            <div class="row">
+                <div class="row">
+                    
+                    <div class="small-12 columns">
+                        <div class="curr-question-number-container">
+                            {{curr_question.question_label}})
+                            <!-- <span ng-class="{flyOut: transition}" class="last-question-number">{{last_question.question_label}}.</span>
+                            <span ng-class="{flyIn: transition}" class="curr-question-number" >{{curr_question.question_label}}.</span> -->
+                        </div>
+                        <div id="question" ng-bind-html="curr_question_name"></div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="small-12 medium-4 small-centered columns" id="answers">
+                        <ul>
+                            <li ng-click="answerquestion($index)" ng-repeat="answer in curr_question.answers">
+                                <!-- <span class="fui-radio-unchecked"></span> -->
+                                <div id="experiment">fgdgdf</div>
+                                <span ng-bind-html="answerdesc(answer)" class="answer"></span>
+                            </li>
+                        </ul>
+                    </div>    
+                </div>
+                
+            </div>
         </div>
 
         <div class="side back">
             <div class="row description">
-            	<div ng-class="{hide: !answerIncorrect}">
-            		<h1>Try Again!</h1>
-            		<p>{{curr_question.incorrectAnswerLabel}}</p>
-            		<a href="" ng-click="flip('front')">&larr; Go back</a>
-            	</div>
-            	<div ng-class="{hide: !finalAnswerCorrect}">
-            		<h1 ng-bind="finishText"></h1>
+                <div ng-class="{hide: !answerIncorrect}">
+                    <h1>Try Again!</h1>
+                    <p>{{curr_question.incorrectAnswerLabel}}</p>
+                    <a href="" ng-click="flip('front')">&larr; Go back</a>
+                </div>
+                <div ng-class="{hide: !finalAnswerCorrect}">
+                    <h1 ng-bind="finishText"></h1>
                     <!-- This was not appreciated )': <img src="http://davidosmond.com/wp-content/uploads/2012/12/the-end.jpg" alt=""> -->
-            		<!-- <p>You have come to the end of the weird and wonderful quiz which should earn Frederick his $2000 computer sometime later this year.</p> -->
-            		<!-- <a href="" ng-click="next()">Next Question! &rarr;</a> -->
-            	</div>
+                    <!-- <p>You have come to the end of the weird and wonderful quiz which should earn Frederick his $2000 computer sometime later this year.</p> -->
+                    <!-- <a href="" ng-click="next()">Next Question! &rarr;</a> -->
+                </div>
             </div>
 
         </div>

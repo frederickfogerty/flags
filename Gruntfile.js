@@ -55,7 +55,7 @@
                 }
             },
             statics: {
-                files: ['src/*.html', 'src/tpl/**', 'src/*', 'src/res/public/*', 'src/backend/*', 'src/css/*', 'src/js/*', 'bower_components/*'],
+                files: ['src/*.html', 'src/tpl/**', 'src/*', 'src/res/public/**', 'src/backend/**', 'src/css/*', 'src/js/*', 'bower_components/*'],
                 tasks: ['copy:main'],
                 options: {
                     livereload: true,

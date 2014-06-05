@@ -8,8 +8,8 @@
 @import foundation
 
 html, body
-    background-color: #dbdbdb
-    background-image: url("../res/images/background-repeat.png")
+    background-color: #fff
+    // background-image: url("../res/images/background-repeat.png")
     background-repeat: repeat
     font-family: 'Open Sans', Helvetica
     /*overflow-x: hidden*/
@@ -36,6 +36,10 @@ hr
     font-weight: normal
     font-style: normal
 
+@font-face
+    font-family: 'Flat-UI-Icons'
+    src: url("../res/fonts/flat-ui-icons-regular.eot")
+
 @import url(//fonts.googleapis.com/css?family=Open+Sans:400,300,600)
  
 //===================================================================
@@ -43,125 +47,62 @@ hr
 //===================================================================
 
 body
-    // // makes sure there is 3D effect
-    // -webkit-perspective: 800px
-    // // Chrome, Safari 3.1+
-    // -moz-perspective: 800px
-    // // Firefox 3.5-15
-    // -ms-perspective: 800px
-    // // IE 9
-    // -o-perspective: 800px
-    // // Opera 10.50-12.00
-    // perspective: 800px
-    // takes up whole browser window for background + vertical centering
-    // position: absolute
     top: 0
     bottom: 0
     height: 100%
     width: 100%
 
-
-*
-    // -moz-perspective: 800px 
-    // -ms-perspective: 800px
-    // -o-perspective: 800px
-    // perspective: 800px
+#flags.flipped
+    left: -100%
+    .back
+        @media #{$small}
+            // margin-left: -25%
+        opacity: 1
+        // margin-left: -45%
 
 =card-ui($div)
     #content-container
         position: relative
-        // approximate screen - nav-bar height
-        margin: auto
-        & > div
-
         #{$div}
-            -moz-perspective: 800px 
-            -ms-perspective: 800px
-            -o-perspective: 800px
-            perspective: 800px
-            // set up css3 transitions
-            -webkit-transform-style: preserve-3d
-            // Chrome, Safari 3.1+
-            -moz-transform-style: preserve-3d
-            // Firefox 3.5-15
-            -ms-transform-style: preserve-3d
-            // IE 9
-            -o-transform-style: preserve-3d
-            // Opera 10.50-12.00
-            transform-style: preserve-3d
             // Specified transitions to advoid problems with other transitions
-            -webkit-transition: .7s -webkit-transform
+            -webkit-transition: .7s
             // Chrome, Safari 3.1+
-            -moz-transition: .7s -moz-transform
+            -moz-transition: .7s
             // Firefox 3.5-15
-            -ms-transition: .7s -ms-transform
+            -ms-transition: .7s
             // IE 9
-            -o-transition: .7s -o-transform
+            -o-transition: .7s
             // Opera 10.50-12.00
-            transition: .7s transform
-            &.flipped
-                // style that is toggled when a flag is clicked
-                -webkit-transform: rotateY(180deg) translateZ(-0.0001px)
-                // Chrome, Safari 3.1+
-                -moz-transform: rotateY(180deg) translateZ(-0.0001px)
-                // Firefox 3.5-15
-                -ms-transform: rotateY(180deg) translateZ(-0.0001px)
-                // IE 9
-                -o-transform: rotateY(180deg) translateZ(-0.0001px)
-                // Opera 10.50-12.00
-                transform: rotateY(180deg) translateZ(-0.0001px)
-            .side
-                // positions card sides behind each other
-                // position: absolute
-                // Stretching method to vertically align div in the center of the parent
-                // top: 0
-                // bottom: 0
-                // width: 100%
-                // margin: auto
-                // margin-right: 20px;
+            transition: .7s
 
-                -webkit-backface-visibility: hidden
-                -moz-backface-visibility: hidden
-                -ms-backface-visibility: hidden
-                -o-backface-visibility: hidden
-                backface-visibility: hidden
-                &:before
-                    // Stretching hack to vertically align div of unknown height
-                    content: ''
-                    display: inline-block
-                    margin-right: -0.25em
-                    height: 100%
-                    vertical-align: middle
-                > div
-                    // Stretching hack to vertically align div of unknown height
-                    display: inline-block
-                    vertical-align: middle
-                    padding: 20px
-                    width: 100%
-                    // general styling
-                    background-color: #f9f9f9
-                    +radius(3px)
-                    box-shadow: 0px 10px 1px -5px #ccc
+            left: 0%
+
+            &.flipped
+                left: -100%
+                .back
+                    opacity: 1
+            .side > div
+                background-color: #f9f9fa
+                +radius(4px)
+                // box-shadow: 0px 10px 1px -5px #ccc
+                padding: 20px
+
+            .side
+                padding: 10px 0 10px 10px
             .front
-                padding: 10px
+                
             .back
-                padding: 10px
-                // make it the back side
-                -webkit-transform: rotateY(180deg)
-                // Chrome, Safari 3.1+
-                -moz-transform: rotateY(180deg)
-                // Firefox 3.5-15
-                -ms-transform: rotateY(180deg)
-                // IE 9
-                -o-transform: rotateY(180deg)
-                // Opera 10.50-12.00
-                transform: rotateY(180deg)
-                // text-align: center;
-                display: none
+                
+                -webkit-transition: inherit
+                position: absolute
+                top: 0px
+                // left: 50%
                 @media #{$small}
-                    display: inherit
-            &.flipped .back
+                    // width: 50%
+                width: 100%
+                margin-left: 100%
                 display: block
+                opacity: 0
 
     
 //===================================================================
@@ -171,8 +112,8 @@ body
 #nav-wrap
     /*margin: 0 0 30px 0*/
     letter-spacing: 1px
-    background-color: #111111
-    box-shadow: 0 5px 2px #bbb
+    background-color: #3498DB
+    // box-shadow: 0 5px 2px #bbb
     #top-ul
         // height: 57px;
         text-align: center
@@ -184,11 +125,15 @@ body
             display: none
             // hide menu icon for large screens
     #title
-        color: white
-        font-weight: bold
-        padding: 16px
+        font:
+            family: 'BebasNeueRegular'
+            size: 18px
+        color: #fff
+        // font-weight: bold
+        padding: 12px
     #nav
         li
+            -webkit-transition: background .3s linear
             display: inline-block
             text-align: center
             margin: 0
@@ -196,18 +141,26 @@ body
             width: auto
             list-style: none
             margin-right: 5px
+            background-color: #3498DB
             a
                 font-weight: 200
                 font-size: 14px
                 padding: 4px 15px
+                margin: 8px 0px
                 display: block
                 color: #fff
+                // background: #3498DB
                 &:hover, &.active:hover
-                    // background: #2795b6;
-                    border-bottom: 5px solid #fff
+                    // background-color: #2980B9
+                    // border-bottom: 5px solid #fff
                 &.active
                     border-bottom: 2px solid #fff
+                    padding-bottom: 3px
                     // text-decoration: underline;
+            &:hover
+                -webkit-transition: background .05s linear
+                background-color: #2980B9
+
 
 // =======MOBILE=========
 @media screen and (max-width: 768px)
@@ -283,39 +236,7 @@ body
 //    All Flags CSS
 //===================================================================
 
-#flags
-    -webkit-transition: 1s
-    left: 0%
-    .side > div
-        background-color: #f9f9f9
-        +radius(3px)
-        box-shadow: 0px 10px 1px -5px #ccc
-        padding: 20px
-    .front
-        -webkit-transition: 1s
-        // position: absolute
-        // left: 50%
-        // width: 100%
-        // margin-left: 50%
-    .back
-        /*position: absolute*/
-        -webkit-transition: 1s
-        // -webkit-transform: translateZ(0)
-        // position: fixed
-        /*left: 50%*/
-        width: 100%
-        /*margin-left: 60%*/
-        display: none
-
-#flags.flipped
-    -webkit-transition: 1s
-    /*left: -100%*/
-    .front
-        display: none
-        // left: -200px
-    .back
-        display: block
-        // margin-left: -40%
++card-ui("#flags")
 
 #flags
     .front
@@ -324,6 +245,10 @@ body
             padding: 10px
         list-style-type: none
         li
+            -webkit-transition: 0.8s background-color
+            -moz-transition: 0.8s background-color
+            -o-transtion: 0.8s background-color
+            transition: 0.8s background-color
             img
                 vertical-align: top
                 padding: 0
@@ -343,15 +268,17 @@ body
                 font-size: 1rem
                 display: inline-block
                 margin: 0
-            border-bottom: 1px solid #ccc
-    .front.hidden
-        li
-            opacity: 0.1
-            &.active
-                display: block
-                position: fixed
-                top: 100px
+            // border-bottom: 1px solid #ccc
+            margin-bottom: 5px
+            &:hover
+                background-color: #efefef
+                -webkit-transition: .05s background-color
+                -moz-transition: .05s background-color
+                -o-transtion: .05s background-color
+                transition: .05s background-color
+
     .back
+        padding: 10px 0 10px 10px
         text-align: left
         h3
             font-family: 'BebasNeueRegular'
@@ -409,39 +336,67 @@ body
     #answers ul
         // margin-top: 10px;
         list-style-type: none
+        text-align: left
         li
-            text-align: center
+            text-align: left
             margin: 0 0 10px 0
-            font-size: 2em
             img
                 padding: 10px
             p
                 display: inline
-            span.qlabel
-                color: #666
-                font:
-                    weight: 200
-            &:hover, &:hover p
-                background-color: #ccc
-                font-weight: bold
+            .answer
+                display: inline
+                font-family: 'Flat-UI-Icons'
+                speak: none
+                font-style: normal
+                font-weight: normal
+                font-variant: normal
+                text-transform: none
+                -webkit-font-smoothing: antialiased
+                -moz-osx-font-smoothing: grayscale
+                &:before
+                    content: "\e02b \00A0 \00A0 \00A0"
+                    display: inline-block
+                    height: 100%
+                &:hover:before
+                    content: "\e032 \00A0 \00A0 \00A0"
+            #experiment
+                display: inline-block
+                height: 100%
     .curr-question-number-container
-        font-size: 40px
-        text-align: center
-        font-weight: 200
-        margin-bottom: 15px
-        overflow: hidden
-        margin-left: 0
-        padding-left: 0
+        // @media #{$small}
+        //     float: left
+        // font-size: 40px
+        // text-align: center
+        // font-weight: 200
+        // margin-bottom: 15px
+        // overflow: hidden
+        // margin-left: 0
+        // padding-left: 0
         -webkit-transtion: 1s
         // Chrome, Safari 3.1+
-        -moz-transtion: 1s
+        -moz-transition: 1s
         // Firefox 3.5-15
-        -ms-transtion: 1s
+        -ms-transition: 1s
         // IE 9
-        -o-transtion: 1s
+        -o-transition: 1s
         // Opera 10.50-12.00
-        transtion: 1s
+        transition: 1s
         // height: 60px;
+        
+
+        font:
+            family: 'BebasNeueRegular'
+            color: #888
+        @media #{$small}
+            font:
+                size: 150px
+            position: absolute
+            opacity: 0.1
+            margin-left: -20px
+        @media #{$small-only}
+            font-size: 50px
+            text-align: center
     .last-question-number.flyOut
         // margin-left: -300px;
         // opacity: 0;
@@ -482,15 +437,24 @@ body
     ul
         list-style: none
         li
+            -webkit-transition: .8s background-color
+            -moz-transition: .8s background-color
+            -o-transtion: .8s background-color
+            transition: .8s background-color
             text-align: center
             padding: 10px
             height: 50px
-            background: url(../res/images/right.png) no-repeat right 0
+            background: url(../res/images/right-01.png) no-repeat right 0
             &.even
-                background-color: #eee
+                background-color: #f5f5f5
             &:hover, &:hover p
-                background-color: #ddd
-                font-weight: bold
+                background: url(../res/images/right-02.png) no-repeat right 0
+                background-color: #dadada
+                // font-weight: bold
+                -webkit-transition: .05s background-color
+                -moz-transition: .05s background-color
+                -o-transtion: .05s background-color
+                transition: .05s background-color
 
 @-webkit-keyframes question-flyOut
     0%
@@ -694,6 +658,10 @@ body
                     color: #888888
                 img
                     height: 40px
+    .back
+        .nav 
+            text-align: center
+            padding: 0 20px 20px 20px
     &.flipped
         .point
             -webkit-animation: none
