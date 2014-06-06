@@ -5,40 +5,37 @@ angular.module('Flags', ['ngRoute','ngSanitize', 'hmTouchEvents'])
             return $sce.trustAsHtml(marked(input));
         }
     })
-	.service('GlobalService', function () {
-
-		// Service to act as a model for the page title
-
-		var pagetitle = "Flags";
+    .service('GlobalService', function () {
+        // Service to act as a model for the page title
+        var pagetitle = "Flags";
         var page = "reference";    
-		return {
-			setTitle: function (title) {
-				pagetitle = title;
-			},
-			getTitle: function() {
-				return pagetitle;
-			},
+        return {
+            setTitle: function (title) {
+                pagetitle = title;
+            },
+            getTitle: function() {
+                return pagetitle;
+            },
             updatePage: function(newpage) {
                 page = newpage;
             },
             getPage: function() {
                 return page;
             }
-		}
-	})
-	// TODO: Add caching service or implement caching
-	.controller('NavCntl', function ($scope, GlobalService, $location, $route) {
-		// Updates the page title when model changes
-		$scope.$watch(GlobalService.getTitle, function (title) {
-			$scope.title = title;
-		})
+        }
+    })
+    .controller('NavCntl', function ($scope, GlobalService, $location, $route) {
+        // Updates the page title when model changes
+        $scope.$watch(GlobalService.getTitle, function (title) {
+            $scope.title = title;
+        })
 
         // Doesn't seem to be working ):
         // $locationProvider.html5mode(true).hashPrefix('!'); 
 
-		$scope.mobile_menu = function () {
-			$scope.nav_class = !$scope.nav_class
-		}
+        $scope.mobile_menu = function () {
+            $scope.nav_class = !$scope.nav_class
+        }
 
         $scope.active_link = function (href) {
             if (href === GlobalService.getPage()) {
@@ -47,30 +44,30 @@ angular.module('Flags', ['ngRoute','ngSanitize', 'hmTouchEvents'])
                 return "";
             }
         }
-	})
-	.controller('AllCntl', function ($scope, $timeout, GlobalService, $http, $sce) {
-		
-		// Controller for All Flags
+    })
+    .controller('AllCntl', function ($scope, $timeout, GlobalService, $http, $sce) {
+        
+        // Controller for All Flags
 
-		// Set page title
-		// GlobalService.setTitle('Reference')
+        // Set page title
+        // GlobalService.setTitle('Reference')
      
         $scope.cssTop = 100 
-		
-		// Pull JSON list of flags from /backend/all_flags.php
-		$http.get('backend/all_flags.php', {cache: true}).success(function(data) {
-       		$scope.flags = data;
-       		angular.forEach($scope.flags, function (value, key) {
-    			$scope.flags[key].show = true;
-    		})
-    	});
+        
+        // Pull JSON list of flags from /backend/all_flags.php
+        $http.get('backend/all_flags.php', {cache: true}).success(function(data) {
+            $scope.flags = data;
+            angular.forEach($scope.flags, function (value, key) {
+                $scope.flags[key].show = true;
+            })
+        });
 
-    	// Activated when a flag is clicked either on all flags or flag detail
-    	$scope.flipOver = function (flag) {
-    		$scope.index = $scope.flags.indexOf(flag); // finds flag in original array
+        // Activated when a flag is clicked either on all flags or flag detail
+        $scope.flipOver = function (flag) {
+            $scope.index = $scope.flags.indexOf(flag); // finds flag in original array
             $scope.switchToFlag()
             $scope.cssTop = $(window).scrollTop()+00 // moves secondary display: RF changed to +00
-    	}
+        }
 
         $scope.switchToFlag = function () {
             if ($scope.index < 0) {
@@ -83,10 +80,10 @@ angular.module('Flags', ['ngRoute','ngSanitize', 'hmTouchEvents'])
             $scope.currentDesc = $sce.trustAsHtml(marked($scope.flags[$scope.index].description))
             $scope.flippedState = true;
         }
-    	
-    	$scope.all = function () {
+        
+        $scope.all = function () {
             $scope.flippedState = false;
-    	}
+        }
 
         $scope.prev = function () {
             $scope.index--
@@ -107,16 +104,16 @@ angular.module('Flags', ['ngRoute','ngSanitize', 'hmTouchEvents'])
             $scope.$apply($scope.prev)
         }
 
-    	// Used in class="..." to show flag description in flag detail
-    	$scope.isActive = function (flag) {
-    		//var index = $scope.flags.indexOf(1flag);
-    		return (flag.active === true ? "active" : "");
-    	}
+        // Used in class="..." to show flag description in flag detail
+        $scope.isActive = function (flag) {
+            //var index = $scope.flags.indexOf(1flag);
+            return (flag.active === true ? "active" : "");
+        }
 
         window.swipe.left = $scope.swipeleft
         window.swipe.right = $scope.swiperight
 
-	})
+    })
     .controller('QuestionListCntl', function($scope, $http, GlobalService, $sce, $location) {
 
         $scope.goTo = function (question) {
@@ -128,24 +125,24 @@ angular.module('Flags', ['ngRoute','ngSanitize', 'hmTouchEvents'])
             $scope.questions = data;
         });
     })
-	.controller('QuestionCntl', function($scope, $http, GlobalService, $sce, $timeout, $routeParams) {
+    .controller('QuestionCntl', function($scope, $http, GlobalService, $sce, $timeout, $routeParams) {
 
-		$scope.setIndex = $routeParams.index;
+        $scope.setIndex = $routeParams.index;
 
         $scope.answerdesc = function (answer) {
             return $sce.trustAsHtml(marked(answer));
         }
 
-		$scope.next = function () {
+        $scope.next = function () {
             $scope.last_question = $scope.curr_question;
-    		$scope.curr_question = $scope.questions[$scope.setIndex].questions[$scope.qIndex];
+            $scope.curr_question = $scope.questions[$scope.setIndex].questions[$scope.qIndex];
             $scope.curr_question_name = $sce.trustAsHtml(marked($scope.curr_question.question))
-    		$scope.qIndex++;
+            $scope.qIndex++;
             $scope.flip('front');
 
             $scope.transition = true;
             $timeout($scope.labelTransStop,  1100)
-    	};
+        };
 
         $scope.answerquestion = function (index) {
             if ($scope.curr_question.correct === index) {
@@ -170,12 +167,12 @@ angular.module('Flags', ['ngRoute','ngSanitize', 'hmTouchEvents'])
             $scope.transition = false;
         }
 
-    	// Start asking questions
-    	$scope.run = function () {
-    		$scope.qIndex = 0;
+        // Start asking questions
+        $scope.run = function () {
+            $scope.qIndex = 0;
             $scope.next();
             $scope.finishText = $scope.questions[$scope.setIndex].finishText;
-    	};
+        };
 
         $scope.flip = function (action) {
             if (action === "front") {
@@ -186,13 +183,13 @@ angular.module('Flags', ['ngRoute','ngSanitize', 'hmTouchEvents'])
                 $scope.flippedState = !$scope.flippedState;
             }  
         }
-		
-		// Retrieve question list from server
-		$http.get('backend/questions.php').success(function(data) {
-       		$scope.questions = data;
+        
+        // Retrieve question list from server
+        $http.get('backend/questions.php').success(function(data) {
+            $scope.questions = data;
             // $scope.format();
-       		$scope.run();
-    	});
+            $scope.run();
+        });
     })
     .controller('ScenarioListCntl', function ($scope, $http, GlobalService, $sce, $location) {
         $scope.goTo = function (scenario) {
@@ -472,18 +469,18 @@ angular.module('Flags', ['ngRoute','ngSanitize', 'hmTouchEvents'])
         });
         
     })
-	.config(['$routeProvider', function($routeProvider, GlobalService) {
+    .config(['$routeProvider', function($routeProvider, GlobalService) {
 
-		// Sets up routes for project
+        // Sets up routes for project
 
-		$routeProvider.
-			when('/all', {templateUrl: 'tpl/all.html', controller: 'AllCntl', resolve: { update: function ($q, GlobalService) {GlobalService.updatePage('reference')}}})
-			.when('/quiz', {templateUrl: 'tpl/questionlist.html',   controller: 'QuestionListCntl', resolve: { update: function ($q, GlobalService) {GlobalService.updatePage('question')}}})
+        $routeProvider.
+            when('/all', {templateUrl: 'tpl/all.html', controller: 'AllCntl', resolve: { update: function ($q, GlobalService) {GlobalService.updatePage('reference')}}})
+            .when('/quiz', {templateUrl: 'tpl/questionlist.html',   controller: 'QuestionListCntl', resolve: { update: function ($q, GlobalService) {GlobalService.updatePage('question')}}})
             .when('/quiz/:index', {templateUrl: 'tpl/questions.html',   controller: 'QuestionCntl', resolve: { update: function ($q, GlobalService) {GlobalService.updatePage('question')}}})
             .when('/scenario', {templateUrl: 'tpl/scenariolist.html',   controller: 'ScenarioListCntl', resolve: { update: function ($q, GlobalService) {GlobalService.updatePage('scenario')}}})
-			.when('/scenario/:index', {templateUrl: 'tpl/scenario.html',   controller: 'ScenarioCntl', resolve: { update: function ($q, GlobalService) {GlobalService.updatePage('scenario')}}})
+            .when('/scenario/:index', {templateUrl: 'tpl/scenario.html',   controller: 'ScenarioCntl', resolve: { update: function ($q, GlobalService) {GlobalService.updatePage('scenario')}}})
             .otherwise({redirectTo: '/all'});
-	}])
+    }])
 
 window.swipe = {}
 
